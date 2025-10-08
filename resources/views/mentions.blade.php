@@ -1,20 +1,19 @@
 <!doctype html>
-<html lang="fr" data-theme="light">
+<html lang="fr" data-theme="dark">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mentions Légales</title>
-  <link rel="stylesheet" href=/css/style.css>
-  <link rel="stylesheet" href=/css/pico.grey.css>
+  <link rel="stylesheet" href=/css/pico.red.css>
 </head>
 
 <body>
 <div class="website">
   <header class="header" role="banner">
+      @include ('inc.nav')
     <center><h1>Mentions Légales</h1></center>
   </header>
-  @include ('inc.aside')
   
   <main id="main" role="main" class="main">
   <p>

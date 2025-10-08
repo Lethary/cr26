@@ -13,3 +13,9 @@ Route::get('/welcome', function () {
 
 
 Route::get('/mentions', [PageController::class, 'mentions']);
+
+Route::get('/classement', [PageController::class, 'classement']);
+
+Route::get('/edition', [PageController::class, 'edition']);
+
+Route::get('/exportation', [PageController::class, 'exportatin']);

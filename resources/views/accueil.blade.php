@@ -1,21 +1,19 @@
 <!doctype html>
-<html lang="fr" data-theme="light">
+<html lang="fr" data-theme="dark">
 
 <head>
   <meta charset="UTF-8">
   <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Concour Robot</title>
-  <link rel="stylesheet" href=/css/style.css>
   <link rel="stylesheet" href=/css/pico.grey.css>
 </head>
 
 <body>
 <div class="website">
   <header class="header" role="banner">
-    <center><h1>Concours de robots inter-collèges</h1></center>
+    @include ('inc.nav')
   </header>
-  @include ('inc.aside')
   
   <main id="main" role="main" class="main">
   <p>Chaque année, les élèves de troisième des collèges des Deux-Sèvres se retrouvent pour démontrer leur créativité et leurs compétences en technologie à travers le <strong>Concours de Robots</strong>. 

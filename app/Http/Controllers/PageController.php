@@ -7,13 +7,19 @@ use Illuminate\View\View;
 
 class PageController extends Controller
 {
-    function index() {
-        return view('test');
-    }
-
     function mentions(): View {
         return view('mentions');
     }
 
-    
+    function classement(): View {
+        return view('classement');
+    }
+
+    function edition(): View {
+        return view('edition');
+    }
+
+    function exportation(): View {
+        return view('exportation');
+    }
 }

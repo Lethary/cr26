@@ -27,12 +27,4 @@ Le projet est développé avec **PHP Laravel**, afin de proposer une solution mo
 - **Jury** : évaluation des épreuves.  
 - **Secrétaire** : saisie des notes.  
 - **Gestionnaire** : supervision, modification des notes, édition des résultats.  
-- **Administrateur** : tous les droits.  
-
----
-
-## 🛠️ Installation
-1. Cloner le dépôt :
-   ```bash
-   git clone https://github.com/ton-compte/concours-robots.git
-   cd concours-robots
+- **Administrateur** : tous les droits.
