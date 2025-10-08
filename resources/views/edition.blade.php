@@ -1,27 +1,7 @@
-<!doctype html>
-<html lang="fr" data-theme="dark">
+@extends('layouts.app')
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Éditions</title>
-  <link rel="stylesheet" href=/css/pico.grey.css>
-</head>
+@section('title', 'Éditions')
 
-<body>
-  <div class="website">
-    <header class="header" role="banner">
-      <center>
-        @include ('inc.nav')
-        <h1>Éditions</h1>
-      </center>
-    </header>
-
-    <main id="main" role="main" class="main">
-    </main>
-
-    @include ('inc.footer')
-  </div>
-</body>
-
-</html>
+@section('content')
+  <p>La page des éditions est en cours de construction. Revenez bientôt pour découvrir les différentes éditions du concours, leurs détails et les résultats associés.</p>
+@endsection

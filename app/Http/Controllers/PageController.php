@@ -7,6 +7,9 @@ use Illuminate\View\View;
 
 class PageController extends Controller
 {
+    function home(): View {
+        return view('accueil');
+    }
     function mentions(): View {
         return view('mentions');
     }

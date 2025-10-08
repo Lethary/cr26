@@ -3,19 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 
-Route::get('/', function () {
-    return view('accueil');
-});
+Route::get('/', [PageController::class, 'home'])->name('home'); // accueil
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+Route::get('/mentions', [PageController::class, 'mentions'])->name('mentions');
 
+Route::get('/classement', [PageController::class, 'classement'])->name('classement');
 
-Route::get('/mentions', [PageController::class, 'mentions']);
+Route::get('/edition', [PageController::class, 'edition'])->name('edition');
 
-Route::get('/classement', [PageController::class, 'classement']);
-
-Route::get('/edition', [PageController::class, 'edition']);
-
-Route::get('/exportation', [PageController::class, 'exportatin']);
+Route::get('/exportation', [PageController::class, 'exportation'])->name('exportation');
