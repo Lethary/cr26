@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
+use App\Models\Classer;
 class PageController extends Controller
 {
     function home(): View {
@@ -14,8 +15,11 @@ class PageController extends Controller
         return view('mentions');
     }
 
-    function classement(): View {
-        return view('classement');
+    public function classement(): View
+    {
+        $scores = Classer::getScores();
+
+        return view('classement', compact('scores'));
     }
 
     function edition(): View {
