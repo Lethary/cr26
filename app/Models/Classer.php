@@ -2,24 +2,27 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Models\Equipe;
+use App\Models\Base\Classer as BaseClasser;
 
-class Classer extends Model
+class Classer extends BaseClasser
 {
-    protected $table = 'classer'; // car ma table ne suit pas la convention Laravel, elle est au singulier
-    public function equipe()
+	protected $table = 'classer';
+	protected $fillable = [
+		'score_total',
+		'commentaire'
+	];
+
+	public function equipe()
     {
         return $this->belongsTo(Equipe::class, 'id_equipe');
     }
 
-    // Récupérer les scores d'une catégorie
-    public static function getScores()
+    // Récupérer tous les scores pour une catégorie donnée
+    public static function getScoresByCategorie(int $idCategorie)
     {
         return self::with('equipe.college')
-            ->where('id_categorie', 99)
+            ->where('id_categorie', $idCategorie)
             ->orderByDesc('score_total')
             ->get();
-
     }
 }

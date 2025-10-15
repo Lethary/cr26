@@ -2,20 +2,25 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Models\College;
+use App\Models\Base\Equipe as BaseEquipe;
 
-class Equipe extends Model
+class Equipe extends BaseEquipe
 {
-    public $timestamps = false;
-
-    // Relation vers le collège
+    protected $table = 'equipes';
+	protected $fillable = [
+		'code',
+		'nom',
+		'site',
+		'commentaire',
+		'id_concours',
+		'id_college'
+	];
     public function college()
     {
-        return $this->belongsTo(College::class, 'id_college', 'id'); 
+        return $this->belongsTo(College::class, 'id_college', 'id');
     }
 
-    // Relation vers Classer
+    // Relation vers les classements
     public function classements()
     {
         return $this->hasMany(Classer::class, 'id_equipe');

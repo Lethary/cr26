@@ -2,9 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Base\Scorer as BaseScorer;
 
-class Scorer extends Model
+class Scorer extends BaseScorer
 {
-//
+	protected $hidden = [
+		'id_secretaire'
+	];
+
+	protected $fillable = [
+		'score',
+		'commentaire'
+	];
 }
