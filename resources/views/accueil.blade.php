@@ -1,21 +1,32 @@
-@extends('layouts.app')
+@extends('layouts.default')
 
 @section('title', 'Accueil')
 
 @section('content')
-  <p>Chaque année, les élèves de troisième des collèges des Deux-Sèvres se retrouvent pour démontrer leur créativité et leurs compétences en technologie à travers le <strong>Concours de Robots</strong>. 
-  Cet événement unique permet aux collégiens de concevoir, programmer et présenter des robots capables de relever différentes épreuves techniques et ludiques.</p> 
+<section aria-labelledby="hero-title" style="margin-top:1rem">
+        <article class="grid" style="align-items:center">
+          <div>
+            <h1 id="hero-title">Projet concours-robots</h1>
+            <p class="contrast">
+              Application web de gestion du concours (inscriptions, saisie des épreuves, classements).
+              Édition 2025 tenue le <strong>vendredi 5 avril 2025</strong> à Valette (9h–15h).
+            </p>
+            <nav>
+              <a role="button" class="primary" href="/inscriptions">Inscrire une équipe</a>
+              <a role="button" href="/resultats">Voir les résultats</a>
+              <a role="button" href="/informations">Infos &amp; règlement</a>
+            </nav>
+          </div>
 
-  <h2>Sur ce site, vous pouvez :</h2>
-  <ul>
-      <li><strong>Inscrire vos équipes</strong> si vous êtes professeur de technologie ;</li>
-      <li><strong>Consulter les résultats</strong> et les classements après le concours ;</li>
-      <li><strong>Découvrir les équipes</strong> et leurs projets via leurs sites de présentation ;</li>
-      <li><strong>Accéder aux informations générales</strong> sur le concours et ses épreuves.</li>
-  </ul>
-
-  <p>Le concours valorise à la fois la performance technique des robots et la créativité des équipes. Chaque épreuve est notée selon un barème précis et peut inclure des <strong>bonus</strong> pour 
-  départager les ex aequo. Les équipes peuvent choisir les épreuves auxquelles elles souhaitent participer, ce qui permet à chacun de montrer ses points forts.</p>
-
-  <p>Que vous soyez <strong>élève, enseignant ou simple visiteur</strong>, explorez les résultats, admirez les projets des collégiens et plongez dans l’univers fascinant de la robotique !</p>
+          <figure>
+            <img
+              src="./images/robot.jpg"
+              alt="Robot de compétition sur une piste"
+              loading="eager"
+              decoding="async"
+              style="width:100%;height:auto;border-radius:1rem" />
+            <figcaption class="secondary">Concours des collèges — Technologie 3<sup>e</sup></figcaption>
+          </figure>
+        </article>
+      </section>
 @endsection

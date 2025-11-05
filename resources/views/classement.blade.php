@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.default')
 
 @section('title', 'Classement')
 
@@ -14,6 +14,7 @@
         </tr>
     </thead>
     <tbody>
+        
         @foreach ($scores as $index => $score)
         <tr>
             <td>{{ $index + 1 }}</td>
