@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Classer;
 
 
 class UserController extends Controller
@@ -62,5 +63,9 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public static function MiseAJourClassement() : void
+    {
+        Classer::updateClassement();
     }
 }

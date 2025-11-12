@@ -14,8 +14,6 @@ on('logout', fn() => $logout());
 ?>
 
 <nav class="flex gap-4">
-    <a href="/" class="text-blue-600">Accueil</a>
-
     <a href="#"
        class="text-red-600"
        onclick="

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 use App\Models\Classer;
-
+use App\Models\User;
 
 class PageController extends Controller
 {
@@ -30,7 +30,10 @@ class PageController extends Controller
 
     public function classement(): View
     {
+        UserController::MiseAJourClassement();
+        
         $scores = Classer::getScoresByCategorie();
+
         return view('classement', compact('scores'));
     }
     public function show2024(): View

@@ -29,55 +29,43 @@ class Classer extends BaseClasser
     }
     public static function updateClassement()
     {
-        // Définition des plages d'épreuves par catégorie
-        $categories = [
-            1 => range(1, 8),
-            2 => [9],
-            3 => [10, 11],
-        ];
+        // On récupère tous les scores groupés par équipe et catégorie
+        $scores = DB::select("
+        SELECT 
+            s.id_equipe,
+            e.id_categorie,
+            SUM(s.score * e.coefficient) AS total
+        FROM mcd_scorer s
+        INNER JOIN mcd_epreuves e ON s.id_epreuve = e.id
+        GROUP BY s.id_equipe, e.id_categorie
+    ");
 
-        // On récupère toutes les équipes
-        $equipes = DB::table('equipes')->get();
+        $classement = [];
 
-        foreach ($equipes as $equipe) {
-            $scoresCategorie = [];
+        // Organiser les scores par équipe
+        foreach ($scores as $row) {
+            $classement[$row->id_equipe][$row->id_categorie] = $row->total;
+        }
 
-            // --- Calcul pour chaque catégorie ---
-            foreach ($categories as $idCategorie => $epreuvesIds) {
-                $total = DB::table('scorer as s')
-                    ->join('epreuves as e', 's.id_epreuve', '=', 'e.id')
-                    ->where('s.id_equipe', $equipe->id)
-                    ->whereIn('s.id_epreuve', $epreuvesIds)
-                    ->selectRaw('SUM(s.score * e.coefficient) as total')
-                    ->value('total');
+        foreach ($classement as $idEquipe => $categories) {
+            // Calcul du total global
+            $totalGlobal = array_sum($categories);
 
-                $total = $total ?? 0;
-                $scoresCategorie[$idCategorie] = $total;
-
-                // Insert ou update la table classer
-                DB::table('classer')->updateOrInsert(
-                    [
-                        'id_equipe' => $equipe->id,
-                        'id_categorie' => $idCategorie
-                    ],
-                    [
-                        'score_total' => $total
-                    ]
-                );
+            // Mise à jour de chaque catégorie
+            foreach ($categories as $idCategorie => $total) {
+                DB::select("
+                INSERT INTO mcd_classer (id_equipe, id_categorie, score_total)
+                VALUES (?, ?, ?)
+                ON DUPLICATE KEY UPDATE score_total = VALUES(score_total)
+            ", [$idEquipe, $idCategorie, $total]);
             }
 
-            // --- Catégorie 99 = cumul de tout ---
-            $totalGlobal = array_sum($scoresCategorie);
-
-            DB::table('classer')->updateOrInsert(
-                [
-                    'id_equipe' => $equipe->id,
-                    'id_categorie' => 99
-                ],
-                [
-                    'score_total' => $totalGlobal
-                ]
-            );
+            // Catégorie 99 = total global
+            DB::select("
+            INSERT INTO mcd_classer (id_equipe, id_categorie, score_total)
+            VALUES (?, 99, ?)
+            ON DUPLICATE KEY UPDATE score_total = VALUES(score_total)
+        ", [$idEquipe, $totalGlobal]);
         }
     }
 }

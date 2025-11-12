@@ -3,6 +3,7 @@
 @section('title', 'Classement')
 
 @section('content')
+
 <table>
     <thead>
         <tr>
@@ -14,7 +15,7 @@
         </tr>
     </thead>
     <tbody>
-        
+
         @foreach ($scores as $index => $score)
         <tr>
             <td>{{ $index + 1 }}</td>
