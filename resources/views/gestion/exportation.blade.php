@@ -3,21 +3,26 @@
 @section('title', 'Accueil')
 
 @section('content')
-<h1>Vous pouvez ici exportez les donnée du classment en pdf,csv ou autres </h1>
-<?php
+<h2>Export du classement</h2>
 
-$list = [
-    ['aaa', 'bbb', 'ccc', 'dddd'],
-    ['123', '456', '789'],
-    ['"aaa"', '"bbb"']
-];
+<div style="display: flex; gap: 15px; margin-top: 20px;">
 
-$fp = fopen('file.csv', 'w');
+    <a href="{{ route('export.classement.final') }}"
+       style="
+            background-color: #0d6efd;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+       "
+       onmouseover="this.style.backgroundColor='#0b5ed7'"
+       onmouseout="this.style.backgroundColor='#0d6efd'">
+        📥 Télécharger le classement final (CSV)
+    </a>
 
-foreach ($list as $fields) {
-     fputcsv($fp, $fields, ',', '"', '');
-}
+</div>
 
-fclose($fp);
-?>
+
 @endsection

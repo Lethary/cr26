@@ -3,11 +3,20 @@
 @section('title', 'Accueil')
 @section('content')
 <h1> Édition du classement </h1>
-<button id="updateRankingButton">Mettre à jour le classement</button>
-<button id="exportRankingButton">Publier le classement</button>
-
 <div class="grid">
-    <div></div>
+<div></div>
+
+    <div>
+        <form action="{{ route('classement.publish') }}" method="POST">
+            @csrf
+            @if($concour->en_cours == 1)
+            <button disabled>Publier le classement (bloqué)</button>
+            @else
+            <button type="submit">Publier le classement</button>
+            @endif
+
+        </form>
+    </div>
     <div>
         <form action="{{ route('concours.block') }}" method="POST">
             @csrf

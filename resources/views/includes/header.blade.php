@@ -1,6 +1,8 @@
 <?php
 
 use App\Livewire\Actions\Logout;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use function Livewire\Volt\action;
 
 $logout = action(function (Logout $logoutAction) {
@@ -8,6 +10,7 @@ $logout = action(function (Logout $logoutAction) {
     $this->redirect('/', navigate: true);
 });
 ?>
+
 <nav class="navbar">
     <div class="navbar-brand">
         <a href="{{ route('home') }}">Projet concours-robots</a>
@@ -19,6 +22,7 @@ $logout = action(function (Logout $logoutAction) {
     <ul class="nav-links" id="nav-links">
         <li><a href="{{ route('home') }}">Accueil</a></li>
 
+        {{-- --------------------------- GUEST --------------------------- --}}
         @guest
         <li class="dropdown">
             <a href="#">Collèges ▾</a>
@@ -37,11 +41,15 @@ $logout = action(function (Logout $logoutAction) {
         @if (Route::has('register'))
         <li><a href="{{ route('register') }}">Inscription</a></li>
         @endif
+
         @else
+        {{-- --------------------------- AUTH --------------------------- --}}
+
         <li class="dropdown">
             <a href="#">Collèges ▾</a>
             <ul class="dropdown-menu">
                 <li><a href="{{ route('colleges.eleves') }}">Élèves</a></li>
+                <li><a href="{{ route('ajout_eleve') }}">Ajout élèves</a></li>
                 <li><a href="{{ route('colleges.equipe') }}">Équipe</a></li>
             </ul>
         </li>
@@ -49,7 +57,14 @@ $logout = action(function (Logout $logoutAction) {
         <li><a href="{{ route('epreuves.index') }}">Épreuves</a></li>
         <li><a href="{{ route('classement.index') }}">Classement</a></li>
 
+        {{-- ------------------ GESTIONNAIRE = ROLE 60 ------------------ --}}
+        @php
+        $role = DB::table('engager')
+        ->where('id_utilisateur', Auth::id())
+        ->value('id_role');
+        @endphp
 
+        @if($role == 60)
         <li><a href="{{ route('saisieNote.index') }}">Saisie Note</a></li>
 
         <li class="dropdown">
@@ -59,6 +74,7 @@ $logout = action(function (Logout $logoutAction) {
                 <li><a href="{{ route('gestion.colleges') }}">Collèges</a></li>
                 <li><a href="{{ route('gestion.abonnement') }}">Abonnement</a></li>
                 <li><a href="{{ route('gestion.role') }}">Rôle</a></li>
+
                 <li class="dropdown">
                     <a href="#">Résultat ▾</a>
                     <ul class="dropdown-menu">
@@ -69,7 +85,16 @@ $logout = action(function (Logout $logoutAction) {
                 </li>
             </ul>
         </li>
+        @endif
 
+        {{-- --------------------------- ADMIN --------------------------- --}}
+        @php
+        $role = DB::table('engager')
+        ->where('id_utilisateur', Auth::id())
+        ->value('id_role');
+        @endphp
+
+        @if($role == 90)
         <li class="dropdown">
             <a href="#">Page Admin ▾</a>
             <ul class="dropdown-menu">
@@ -78,11 +103,13 @@ $logout = action(function (Logout $logoutAction) {
                 <li><a href="{{ route('admin.pays') }}">Pays</a></li>
             </ul>
         </li>
+        @endif
 
-        <!-- Déconnexion -->
+        {{-- Déconnexion --}}
         <li>
-        @livewire('layout.navigation')
+            @livewire('layout.navigation')
         </li>
+
         @endguest
     </ul>
 </nav>
