@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ConcourController;
+
 use Livewire\Volt\Volt;
 
 // Accueil
@@ -23,7 +25,12 @@ Route::get('/edition/2024', [PageController::class, 'show2024'])->name('edition.
 Route::get('/edition/2025', [PageController::class, 'show2025'])->name('edition.2025');
 
 // Saisie Note
-Route::get('/saisie-note', [PageController::class, 'saisie-note'])->name('saisieNote.index');
+Route::post('/concours/block-saisie', [ConcourController::class, 'blockSaisie'])
+    ->name('concours.block');
+    Route::get('/saisie-note', [PageController::class, 'saisie'])
+    ->middleware('concour.enCours')
+    ->name('saisieNote.index');
+
 
 // Page Gestion
 Route::prefix('gestion')->group(function () {

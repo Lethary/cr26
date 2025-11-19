@@ -6,6 +6,7 @@ use App\Models\Base\Concour as BaseConcour;
 
 class Concour extends BaseConcour
 {
+	protected $table = 'concours';
 	protected $fillable = [
 		'nom',
 		'date_debut',

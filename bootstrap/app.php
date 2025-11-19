@@ -11,8 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware): void {
-        RedirectIfAuthenticated::redirectUsing(fn() => route('home'));
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->alias([
+            'concour.enCours' => \App\Http\Middleware\CheckConcourEnCours::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
